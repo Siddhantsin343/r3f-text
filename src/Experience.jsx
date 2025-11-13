@@ -1,24 +1,16 @@
-import { OrbitControls, Text } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { OrbitControls, Text, Float } from "@react-three/drei";
 
 export default function Experience() {
-  const textRef = useRef();
-  const { mouse } = useThree();
-
-  useFrame(() => {
-    if (!textRef.current) return;
-    textRef.current.rotation.x = mouse.y * 0.5;
-    textRef.current.rotation.y = -mouse.x * 0.5;
-  });
-
   return (
     <>
-      <OrbitControls enableZoom={false} />
-      <ambientLight intensity={0.5} />
-      <Text ref={textRef} fontSize={1.2} color="#ff8800" anchorX="center" anchorY="middle">
-        Interactive Text
-      </Text>
+      <OrbitControls makeDefault />
+      <ambientLight intensity={0.6} />
+
+      <Float speed={3} rotationIntensity={1.5} floatIntensity={2}>
+        <Text fontSize={1.2} color="#00ffaa">
+          Floating Text
+        </Text>
+      </Float>
     </>
   );
 }
