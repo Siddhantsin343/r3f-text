@@ -1,0 +1,23 @@
+html,
+body,
+#root
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(40, 40, 40);
+}
+
+.label >div{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.304);
+    color: white;
+    padding: 15px;
+    overflow: hidden;
+    white-space: no-wrap;
+    border-radius: 30px;
+    user-select: none;
+}
