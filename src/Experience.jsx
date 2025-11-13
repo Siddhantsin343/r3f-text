@@ -1,36 +1,25 @@
-import { OrbitControls, Text, Float } from "@react-three/drei";
+import { OrbitControls, Text } from "@react-three/drei";
 import { useRef } from "react";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { useFrame } from "@react-three/fiber";
 
 export default function Experience() {
   const textRef = useRef();
 
+  useFrame(({ clock }) => {
+    if (!textRef.current) return;
+    textRef.current.children.forEach((char, i) => {
+      char.position.y = Math.sin(clock.getElapsedTime() * 2 + i * 0.3) * 0.2;
+    });
+  });
+
   return (
     <>
-      {/* Camera Controls */}
       <OrbitControls makeDefault />
+      <ambientLight intensity={0.6} />
 
-      {/* Lights */}
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-
-      {/* Floating 3D Text */}
-      <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-        <Text
-          ref={textRef}
-          fontSize={1}
-          color="#00ffff"
-          outlineWidth={0.03}
-          outlineColor="#ffffff"
-          anchorX="center"
-          anchorY="middle"
-        >
-          I love R3F
-        </Text>
-        <EffectComposer>
-  <Bloom intensity={1.5} luminanceThreshold={0} luminanceSmoothing={0.9} />
-</EffectComposer>
-      </Float>
+      <Text ref={textRef} fontSize={0.9} color="#ff66cc" anchorX="center" anchorY="middle">
+        Wavy Motion
+      </Text>
     </>
   );
 }
